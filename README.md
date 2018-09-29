@@ -1,1 +1,4 @@
-# programming-pearls
+- Virtualization VMware
+- OS Ubuntu-18.04.x
+- OS type 64-bit
+- Compiler Clang-6.0.0

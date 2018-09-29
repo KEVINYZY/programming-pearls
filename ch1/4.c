@@ -1,29 +1,30 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 #include <stdbool.h>
+#include <time.h>
 
-bool IsUnique(const unsigned long *arr, const unsigned long length, const unsigned long target);
-void MakeRandArray(unsigned long *arr, const unsigned long length, const unsigned long min, const unsigned long max);
-void MakeFileByRandArray(const unsigned long *arr, const unsigned long length, const char *file_name);
+bool IsUnique(const unsigned *arr, const unsigned length, const unsigned target);
+void MakeRandArray(unsigned *arr, const unsigned length, const unsigned min, const unsigned max);
+void MakeFileByRandArray(const unsigned *arr, const unsigned length, const char *file_name);
 
 int main(void)
 {
-  // 7位十进制整数，需要 unsigned long
+  // int 32位长
+  // 7位十进制正整数，使用 unsgined
   // [min, max] 闭区间
-  const unsigned long length = 10;
-  const unsigned long min = 10;
-  const unsigned long max = 19;
-  unsigned long arr[length];
+  const unsigned length = 1000000;
+  const unsigned min = 1000000;
+  const unsigned max = 9999999;
+  unsigned arr[length];
   MakeRandArray(arr, length, min, max);
   MakeFileByRandArray(arr, length, "rand_int.txt");
   return 0;
 }
 
-bool IsUnique(const unsigned long *arr, const unsigned long length, const unsigned long target)
+bool IsUnique(const unsigned *arr, const unsigned length, const unsigned target)
 {
   bool result = true;
-  for (unsigned long i = 0; i < length; i++)
+  for (unsigned i = 0; i < length; i++)
   {
     if (arr[i] == target)
     {
@@ -34,20 +35,20 @@ bool IsUnique(const unsigned long *arr, const unsigned long length, const unsign
   return result;
 }
 
-void MakeRandArray(unsigned long *arr, const unsigned long length, const unsigned long min, const unsigned long max)
+void MakeRandArray(unsigned *arr, const unsigned length, const unsigned min, const unsigned max)
 {
-  srand((unsigned int)time(NULL));
-  for (unsigned long i = 0; i < length; i++)
+  srand((unsigned)time(NULL));
+  for (unsigned i = 0; i < length; i++)
   {
-    int _rand = rand() % max;
+    unsigned _rand = (unsigned)rand() % max;
     while (_rand < min || !IsUnique(arr, i, _rand))
-      _rand = rand() % max + 1;
+      _rand = (unsigned)rand() % max + 1;
 
     arr[i] = _rand;
   }
 }
 
-void MakeFileByRandArray(const unsigned long *arr, const unsigned long length, const char *file_name)
+void MakeFileByRandArray(const unsigned *arr, const unsigned length, const char *file_name)
 {
   FILE *fp;
   if (!(fp = fopen(file_name, "w")))
@@ -56,8 +57,8 @@ void MakeFileByRandArray(const unsigned long *arr, const unsigned long length, c
     exit(EXIT_FAILURE);
   }
 
-  for (unsigned long i = 0; i < length; i++)
-    fprintf(fp, "%lu\n", arr[i]);
+  for (unsigned i = 0; i < length; i++)
+    fprintf(fp, "%u\n", arr[i]);
 
   if (fclose(fp))
     fprintf(stderr, "Failed to close %s\n", file_name);
