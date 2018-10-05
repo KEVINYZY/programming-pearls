@@ -12,9 +12,9 @@ int main(void)
   // int 32位长
   // 7位十进制正整数，使用 unsgined
   // [min, max] 闭区间
-  const unsigned kMin = 10000;
-  const size_t kLength = 10000;
-  const unsigned kMax = 99999;
+  const unsigned kMin = 1000000;
+  const size_t kLength = 1000000;
+  const unsigned kMax = 9999999;
   unsigned arr[kLength];
   MakeRandArray(arr, kLength, kMin, kMax);
   MakeFileByRandArray(arr, kLength);
@@ -62,7 +62,7 @@ void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const
 
 void MakeFileByRandArray(const unsigned *arr, const size_t length)
 {
-  const kFileName = "rand.txt";
+  const char *const kFileName = "rand.txt";
   FILE *fp;
   if (!(fp = fopen(kFileName, "w")))
   {
