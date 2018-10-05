@@ -2,15 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-// [min, max)
-const size_t kDivideConut = 2500;
-const size_t kLength = 7000000;
-const unsigned kMin = 1000000;
-const unsigned kMax = 10000000;
-const size_t kUnit = kLength / kDivideConut;
-const size_t kUnitReminder = kLength % kDivideConut;
-const unsigned kInterval = (kMax - kMin) / kDivideConut;
-const char *kFileName = "rand.txt";
+#include "_sort.h"
 
 bool IsUnique(const unsigned *arr, const size_t length, const unsigned target);
 void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const unsigned max, FILE *fp);
@@ -29,6 +21,9 @@ void DividArray(void)
   // int 32位长
   // 7位十进制正整数，使用 unsgined
   // TODO 够简短高效吗？
+  const size_t kUnit = kLength / kDivideConut;
+  const size_t kUnitReminder = kLength % kDivideConut;
+  const unsigned kInterval = (kMax - kMin) / kDivideConut;
   FILE *fp;
   if (!(fp = fopen(kFileName, "w")))
   {
