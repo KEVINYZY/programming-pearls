@@ -2,8 +2,8 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#include "_sort.h"
-const size_t kDivideConut = 2500, kLength = 7000000;
+const size_t kDivideConut = 2500, kLength = 8000000;
+const unsigned kMax = 10000000;
 
 bool IsUnique(const unsigned *arr, const size_t length, const unsigned target);
 void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const unsigned max, FILE *fp);
@@ -30,7 +30,7 @@ void DividArray(const char *const file_name)
   // TODO 够简短高效吗？
   const size_t kUnit = kLength / kDivideConut;
   const size_t kUnitReminder = kLength % kDivideConut;
-  const unsigned kInterval = (kMax - kMin) / kDivideConut;
+  const unsigned kInterval = kMax / kDivideConut;
   FILE *fp;
   if (!(fp = fopen(file_name, "w")))
   {
@@ -41,7 +41,7 @@ void DividArray(const char *const file_name)
   {
     bool last_index = i + 1 == kDivideConut;
     size_t length = last_index ? kUnit + kUnitReminder : kUnit;
-    unsigned min = kMin + i * kInterval;
+    unsigned min = i * kInterval;
     unsigned max = last_index ? kMax : min + kInterval;
     unsigned arr[length];
 
