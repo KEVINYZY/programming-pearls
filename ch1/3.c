@@ -1,7 +1,8 @@
+// 不限制内存的方式，需要 8789KiB 内存
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
-#include "_sort.h"
+const unsigned kMax = 10000000;
 const char *kSortFileName = "sort.txt";
 
 void ReadArrayFromFile(bool *arr, const char *const file_name);
@@ -17,7 +18,7 @@ int main(int argc, char *argv[])
 
   const char *const kFileName = argv[1];
   bool *vector_array;
-  if (!(vector_array = (bool *)malloc(sizeof(bool) * (kMax - kMin))))
+  if (!(vector_array = (bool *)malloc(sizeof(bool) * kMax)))
   {
     fprintf(stderr, "Memory allocation failed.\n");
     exit(EXIT_FAILURE);
@@ -41,7 +42,7 @@ void ReadArrayFromFile(bool *arr, const char *const file_name)
   while (fscanf(fp, "%s", string_value) == 1)
   {
     value = (unsigned)strtoull(string_value, NULL, 10);
-    arr[value - kMin] = true;
+    arr[value] = true;
   }
   if (fclose(fp))
     fprintf(stderr, "Failed to close %s\n", file_name);
@@ -55,10 +56,10 @@ void WriteFileFromArray(bool *arr)
     fprintf(stderr, "Failed to open file %s\n", kSortFileName);
     exit(EXIT_FAILURE);
   }
-  for (size_t i = 0; i < kMax - kMin; i++)
+  for (size_t i = 0; i < kMax; i++)
   {
     if (arr[i])
-      fprintf(fp, "%u\n", (unsigned)i + kMin);
+      fprintf(fp, "%u\n", (unsigned)i);
   }
   if (fclose(fp))
     fprintf(stderr, "Failed to close %s\n", kSortFileName);
