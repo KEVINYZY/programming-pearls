@@ -3,20 +3,27 @@
 #include <stdbool.h>
 #include <time.h>
 #include "_sort.h"
+const size_t kDivideConut = 2500, kLength = 7000000;
 
 bool IsUnique(const unsigned *arr, const size_t length, const unsigned target);
 void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const unsigned max, FILE *fp);
-void DividArray(void);
+void DividArray(const char *const file_name);
 
-int main(void)
+int main(int argc, char *argv[])
 {
   // const unsigned kStart = time(NULL);
-  DividArray();
+  if (argc < 2)
+  {
+    fprintf(stderr, "Program required a file name.\n");
+    exit(EXIT_FAILURE);
+  }
+  const char *const kFileName = argv[1];
+  DividArray(kFileName);
   // printf("Time %us\n", (unsigned)time(NULL) - kStart);
   return 0;
 }
 
-void DividArray(void)
+void DividArray(const char *const file_name)
 {
   // int 32位长
   // 7位十进制正整数，使用 unsgined
@@ -25,9 +32,9 @@ void DividArray(void)
   const size_t kUnitReminder = kLength % kDivideConut;
   const unsigned kInterval = (kMax - kMin) / kDivideConut;
   FILE *fp;
-  if (!(fp = fopen(kFileName, "w")))
+  if (!(fp = fopen(file_name, "w")))
   {
-    fprintf(stderr, "Failed to open file %s\n", kFileName);
+    fprintf(stderr, "Failed to open file %s\n", file_name);
     exit(EXIT_FAILURE);
   }
   for (size_t i = 0; i < kDivideConut; i++)
@@ -43,7 +50,7 @@ void DividArray(void)
   }
 
   if (fclose(fp))
-    fprintf(stderr, "Failed to close %s\n", kFileName);
+    fprintf(stderr, "Failed to close %s\n", file_name);
 }
 
 bool IsUnique(const unsigned *arr, const size_t length, const unsigned target)
