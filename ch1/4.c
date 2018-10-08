@@ -14,7 +14,7 @@ int main(int argc, char *argv[])
   // const unsigned kStart = time(NULL);
   if (argc < 2)
   {
-    fprintf(stderr, "Program required a file name.\n");
+    fprintf(stderr, "需要指定输出文件。\n");
     exit(EXIT_FAILURE);
   }
   const char *const kFileName = argv[1];

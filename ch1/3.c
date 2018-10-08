@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
   if (argc < 2)
   {
-    fprintf(stderr, "Program required a file name.\n");
+    fprintf(stderr, "需要指定输入文件。\n");
     exit(EXIT_FAILURE);
   }
 
