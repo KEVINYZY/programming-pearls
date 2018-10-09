@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-const size_t kDivideConut = 2500, kLength = 8000000;
+const size_t kDivideConut = 2500,
+             kLength = 8000000;
 const unsigned kMax = 10000000;
 
-bool IsUnique(const unsigned *arr, const size_t length, const unsigned target);
-void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const unsigned max, FILE *fp);
+bool IsUnique(const unsigned * const arr, size_t length, unsigned target);
+void MakeRandArray(unsigned *arr, size_t length, unsigned min, unsigned max, FILE *fp);
 void DividArray(const char *const file_name);
 
 int main(int argc, char *argv[])
@@ -53,7 +54,7 @@ void DividArray(const char *const file_name)
     fprintf(stderr, "Failed to close %s\n", file_name);
 }
 
-bool IsUnique(const unsigned *arr, const size_t length, const unsigned target)
+bool IsUnique(const unsigned * const arr, size_t length, unsigned target)
 {
   bool result = true;
   for (size_t i = 0; i < length; i++)
@@ -67,7 +68,7 @@ bool IsUnique(const unsigned *arr, const size_t length, const unsigned target)
   return result;
 }
 
-void MakeRandArray(unsigned *arr, const size_t length, const unsigned min, const unsigned max, FILE *fp)
+void MakeRandArray(unsigned *arr, size_t length, unsigned min, unsigned max, FILE *fp)
 {
   srand((unsigned)time(NULL));
   for (size_t i = 0; i < length; i++)

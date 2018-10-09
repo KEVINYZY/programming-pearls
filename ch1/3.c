@@ -6,7 +6,7 @@ const unsigned kMax = 10000000;
 const char *kSortFileName = "sort.txt";
 
 void ReadArrayFromFile(bool *arr, const char *const file_name);
-void WriteFileFromArray(bool *arr);
+void WriteFileFromArray(const bool *const arr);
 
 int main(int argc, char *argv[])
 {
@@ -48,7 +48,7 @@ void ReadArrayFromFile(bool *arr, const char *const file_name)
     fprintf(stderr, "Failed to close %s\n", file_name);
 }
 
-void WriteFileFromArray(bool *arr)
+void WriteFileFromArray(const bool *const arr)
 {
   FILE *fp;
   if (!(fp = fopen(kSortFileName, "w")))

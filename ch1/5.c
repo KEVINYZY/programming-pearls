@@ -9,8 +9,8 @@ const size_t kDivideCount = 10;
 const size_t kLength = kMax / kDivideCount;
 const char *kSortFileName = "sort.txt";
 
-void ReadArrayFromFile(bool *arr, const char *const file_name, const size_t index);
-void WriteFileFromArray(bool *arr, const size_t index);
+void ReadArrayFromFile(bool *arr, const char *const file_name, size_t index);
+void WriteFileFromArray(const bool *const arr, size_t index);
 
 int main(int argc, char *argv[])
 {
@@ -32,7 +32,7 @@ int main(int argc, char *argv[])
   return 0;
 }
 
-void ReadArrayFromFile(bool *arr, const char *const file_name, const size_t index)
+void ReadArrayFromFile(bool *arr, const char *const file_name, size_t index)
 {
   FILE *fp;
   char string_value[8];
@@ -44,7 +44,7 @@ void ReadArrayFromFile(bool *arr, const char *const file_name, const size_t inde
   }
   while (fscanf(fp, "%s", string_value) == 1)
   {
-    value = (size_t)(strtoull(string_value, NULL, 10) - kLength * index );
+    value = (size_t)(strtoull(string_value, NULL, 10) - kLength * index);
     if (value >= 0 && value < kLength)
       arr[value] = true;
   }
@@ -52,7 +52,7 @@ void ReadArrayFromFile(bool *arr, const char *const file_name, const size_t inde
     fprintf(stderr, "Failed to close %s\n", file_name);
 }
 
-void WriteFileFromArray(bool *arr, const size_t index)
+void WriteFileFromArray(const bool *const arr, size_t index)
 {
   FILE *fp;
   if (!(fp = fopen(kSortFileName, index ? "a" : "w")))
