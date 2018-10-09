@@ -118,9 +118,6 @@ void WriteArrayToFile(const Rand *const arr, size_t length, const char *const fi
 
   for (size_t i = 0; i < length; i++)
   {
-    if (arr[i].count <= kMinCount)
-      continue;
-
     for (char j = kMinCount; j < arr[i].count; j++)
       fprintf(fp, "%u\n", arr[i].number);
   }
