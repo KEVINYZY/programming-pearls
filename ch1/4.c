@@ -6,7 +6,7 @@ const size_t kDivideConut = 2500,
              kLength = 8000000;
 const unsigned kMax = 10000000;
 
-bool IsUnique(const unsigned * const arr, size_t length, unsigned target);
+bool IsUnique(const unsigned *const arr, size_t length, unsigned target);
 void MakeRandArray(unsigned *arr, size_t length, unsigned min, unsigned max, FILE *fp);
 void DividArray(const char *const file_name);
 
@@ -28,7 +28,6 @@ void DividArray(const char *const file_name)
 {
   // int 32位长
   // 7位十进制正整数，使用 unsgined
-  // TODO 够简短高效吗？
   const size_t kUnit = kLength / kDivideConut;
   const size_t kUnitReminder = kLength % kDivideConut;
   const unsigned kInterval = kMax / kDivideConut;
@@ -54,7 +53,7 @@ void DividArray(const char *const file_name)
     fprintf(stderr, "Failed to close %s\n", file_name);
 }
 
-bool IsUnique(const unsigned * const arr, size_t length, unsigned target)
+bool IsUnique(const unsigned *const arr, size_t length, unsigned target)
 {
   bool result = true;
   for (size_t i = 0; i < length; i++)
