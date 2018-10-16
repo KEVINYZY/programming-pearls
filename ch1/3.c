@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 const unsigned kMax = 10000000;
-const char *kSortFileName = "sort.txt";
+const char *const kSortFileName = "sort.txt";
 
 void ReadArrayFromFile(bool *arr, const char *const file_name);
 void WriteFileFromArray(const bool *const arr);
@@ -32,18 +32,15 @@ int main(int argc, char *argv[])
 void ReadArrayFromFile(bool *arr, const char *const file_name)
 {
   FILE *fp;
-  char string_value[8];
   unsigned value;
   if (!(fp = fopen(file_name, "r")))
   {
     fprintf(stderr, "Failed to open file %s\n", file_name);
     exit(EXIT_FAILURE);
   }
-  while (fscanf(fp, "%s", string_value) == 1)
-  {
-    value = (unsigned)strtoull(string_value, NULL, 10);
+  while (fscanf(fp, "%u", &value) > 0)
     arr[value] = true;
-  }
+
   if (fclose(fp))
     fprintf(stderr, "Failed to close %s\n", file_name);
 }
